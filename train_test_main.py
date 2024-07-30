@@ -68,14 +68,14 @@ class ResNet18_merge(nn.Module):
 
 def train_val_model(device, running_date):
 
-    Excel = '5fold_cv_4.csv'
+    Excel = '5fold_cv.csv'
 
     df = pd.read_csv(Excel)
     count = len(df)
 
     keys = ["image"]
 
-    pd_num_cat = pd.read_csv('processed_features_840_w3smoking.csv') # processed_features_840_w3smoking   linical_features_840.csv
+    pd_num_cat = pd.read_csv('clinical_features_840.csv')
 
     best_metric_container = {
         'best_true_label': [],
