@@ -3,7 +3,9 @@ This is the supplementary code for the paper "Integrated Deep Learning Model for
 
 ## Input data
 ### 1 image preprocessing 
-The lung window setting was performed based on [WW: 1600 HU, WL: -700 HU]. Since CT scans in the NELSON and ImaLife data derive from different years, medical centers, and CT scanners, we performed image preprocessing on both NELSON datasets to reduce the variability in slice thicknesses and image resolution. CT scans were interpolated to a voxel size of 1×1×1 mm using trilinear interpolation [22]. To reduce noise caused by the background surrounding the nodules, we extracted the nodules from the whole CT scans using the centroid coordinates labelled by radiologists. Each lung nodule was saved separately in the center of a 3D cube of 32×32×32 mm3.
+The lung window setting was performed based on [WW: 1600 HU, WL: -700 HU]. 
+CT scans were interpolated to a voxel size of 1×1×1 mm using trilinear interpolation. 
+Each lung nodule was saved separately in the center of a 3D cube of 32×32×32 mm3.
 
 ### 2 Clinical data preprocessing
 Clinical data: participant demographics  
