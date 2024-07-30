@@ -9,8 +9,8 @@ This is the supplementary code for the paper "Integrated Deep Learning Model for
 
 ### 2 Clinical data preprocessing
 Clinical data: participant demographics  
-numerical variables (age and pack-years) -> normalized them to the range of [0,1]
-categorical variables (gender and smoking status) -> one-hot encoding
+- numerical variables (age and pack-years) -> normalized them to the range of [0,1]
+- categorical variables (gender and smoking status) -> one-hot encoding
 
 
 ## Model training and testing
