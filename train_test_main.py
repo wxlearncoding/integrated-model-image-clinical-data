@@ -58,7 +58,10 @@ class ResNet18_merge(nn.Module):
         # Inputting clinical data and also handling empty embeddings
         if len(embeddings) == 0:
             embeddings = torch.zeros([batch_size,7]) 
-
+        else:
+        # Fill NaN values with zeros
+            embeddings = torch.nan_to_num(embeddings, nan=0.0)
+    
         combined = torch.cat([x, embeddings.float()], dim=1)
 
         x = self.mlp3(combined)
