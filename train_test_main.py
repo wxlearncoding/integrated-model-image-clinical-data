@@ -248,56 +248,10 @@ def train_val_model(device, running_date):
                       f"{phase}_precision: {epoch_precision:.4f}", 
                       f"{phase}_recall/sensitivity: {epoch_recall:.4f}",
                       f"{phase}_specificity: {epoch_cm[0,0]/(epoch_cm[0,0]+epoch_cm[0,1]):.4f}",
-                      f"{phase}_f1_score: {epoch_f1_score:.4f}")
-
-                # Collect the results for this epoch in a dict
-                results_dict = {
-                    'Fold': i,
-                    'Epoch': epoch + 1,
-                    'Phase': phase,
-                    'Loss': epoch_loss,
-                    'Accuracy': epoch_acc.item(),
-                    'TN': int(epoch_cm[0,0]),
-                    'FN': int(epoch_cm[1,0]),
-                    'FP': int(epoch_cm[0,1]),
-                    'TP': int(epoch_cm[1,1]),
-                    'Precision': epoch_precision,
-                    'Recall/sensitivity': epoch_recall,
-                    'Specificity': epoch_cm[0,0]/(epoch_cm[0,0]+epoch_cm[0,1]),
-                    'F1 Score': epoch_f1_score
-                }
-
-                # Append the dict to the DataFrame
-                results_df = pd.concat([results_df, pd.DataFrame(results_dict,index=[0])], ignore_index=True)
-                
-                # Creating folder and exist or not?
-                save_path = os.path.join('./result/', 'N{}_{}_T{}_E{}_{}'.format(count, 'resnet_128_16', threshold, max_epochs, running_date)) # 'resnet_128_16'
-                if not os.path.exists(save_path):
-                    os.makedirs(save_path)
-
-                if phase == 'val':
-                    if epoch_f1_score >= best_metric:
-
-                        torch.save(model.state_dict(), f"{save_path}/best_model_epoch_fold{i}_epoch{epoch + 1}.pth")
-                        print("saved new best metric model")
-
-                        best_metric = epoch_f1_score
-                        best_metric_epoch = epoch + 1
-                    
-        best_metric_container['best_true_label'].append(val_true_labels[best_metric_epoch-1])
-        best_metric_container['best_predicted_label'].append(val_predicted_labels[best_metric_epoch-1])
-        best_metric_container['best_metric'].append(best_metric)
-        best_metric_container['best_probability'].append(val_probabilities[best_metric_epoch-1])
+                      f"{phase}_f1_score: {epoch_f1_score:.4f}")          
             
         print("............END........fold{}.................".format(i))  
         print()
-
-    with open(os.path.join(save_path, 'csv_name.txt'), 'w') as file:
-        # Write the text to the file
-        file.write(Excel)
-
-
-
     
 if __name__ == '__main__':      
     
