@@ -41,7 +41,7 @@ class ResNet18_merge(nn.Module):
         self.mlp1 = nn.Linear(512,128)
         self.mlp2 = nn.Linear(128,16)
 
-        self.mlp3 = nn.Linear(23,2)  # (22,2) # Notably, mlp3 expects a combined feature size of 22/23: 16 + 6/7 = 22/23
+        self.mlp3 = nn.Linear(23,2)  
 
 
     def forward(self, x, embeddings):
