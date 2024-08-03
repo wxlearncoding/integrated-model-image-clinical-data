@@ -57,7 +57,7 @@ class ResNet18_merge(nn.Module):
 
         # Inputting clinical data and also handling empty embeddings
         if len(embeddings) == 0:
-            embeddings = torch.zeros([batch_size,7]) # 6 or 7
+            embeddings = torch.zeros([batch_size,7]) 
 
         combined = torch.cat([x, embeddings.float()], dim=1)
 
