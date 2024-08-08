@@ -55,13 +55,23 @@ class ResNet18_merge(nn.Module):
         x = self.mlp1(x)
         x = self.mlp2(x)
 
-        # Inputting clinical data and also handling empty embeddings
-        if len(embeddings) == 0:
-            embeddings = torch.zeros([batch_size,7]) 
+        # Handling missing data in embeddings
+        if embeddings.size(0) == 0:
+            embeddings = torch.zeros([batch_size, 7])
         else:
-        # Fill NaN values with zeros
-            embeddings = torch.nan_to_num(embeddings, nan=0.0)
-    
+            # Handling numerical data (e.g., Age, Pack-Years)
+            for i, column in enumerate([age_index, pack_years_index]):  # specify indices based on your dataframe
+                median_value = torch.nanmedian(embeddings[:, column])
+                embeddings[:, column] = torch.where(torch.isnan(embeddings[:, column]),
+                                                    median_value,
+                                                    embeddings[:, column])
+                
+            # Impute missing categorical data (e.g., Gender, Smoking Status) with mode
+            for category_indices in [gender_indices, smoking_indices]:  # specify one-hot indices
+                mode_value = torch.mode(embeddings[:, category_indices], dim=0)[0]
+                missing_mask = torch.isnan(embeddings[:, category_indices]).all(dim=1)
+                embeddings[missing_mask, category_indices] = mode_value
+        
         combined = torch.cat([x, embeddings.float()], dim=1)
 
         x = self.mlp3(combined)
