@@ -1,5 +1,7 @@
 '''
-Tang wei, Jingxuan Wang
+@Author: Wei Tang, Jingxuan Wang
+
+@Contact: j.wang02@umcg.nl
 '''
 import os
 import torch
@@ -25,8 +27,8 @@ import shap
 import matplotlib
 matplotlib.use('Agg')  # or 'TkAgg', 'GTK3Agg', etc.
 
+# visualization using SHAP
 
-# visualization using shapley
 class ResNet18_merge(nn.Module):
 
     def __init__(self):
@@ -40,7 +42,6 @@ class ResNet18_merge(nn.Module):
 
         self.mlp1 = nn.Linear(512,128)
         self.mlp2 = nn.Linear(128,16)
-
         self.mlp3 = nn.Linear(23,2)
 
     def forward(self, x, embeddings):
@@ -56,7 +57,7 @@ class ResNet18_merge(nn.Module):
 
         # Inputting clinical data and also handling empty embeddings
         if len(embeddings) == 0:
-            embeddings = torch.zeros([batch_size,7]) # 6 or 7
+            embeddings = torch.zeros([batch_size,7]) 
 
         combined = torch.cat([x, embeddings.float()], dim=1)
 
@@ -76,7 +77,6 @@ def clean_embeddings(embeddings):
 
 
 device = torch.device("cpu")
-# device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 model = ResNet18_merge().to(device)
 model_name = 'ensemble_3ss'
@@ -86,7 +86,7 @@ count = len(df)
 
 keys = ["image"]
 
-pd_num_cat = pd.read_csv('../processed_features_840_w3smoking.csv')
+pd_num_cat = pd.read_csv('../processed_features_840.csv') # please use your file location
 
 all_shap_values_0, all_shap_values_1, all_shap_values, all_combined_inputs = [], [], [], []
 
@@ -130,8 +130,8 @@ for i in range(1, 6):
     '''
     Model loading
     '''
-    model_save_path = r'I:\JingxuanTem\Models\Ensemble model\N840_ensemble_3ss_T0.4_E100_2024_04_24_14_paper_vis\test'
-    model_save = glob.glob(os.path.join(model_save_path, "best_model_fold{}_epoch*.pth".format(i)))[0]
+    model_save_path = r'...'  # please use your file location
+    model_save = glob.glob(os.path.join(model_save_path, "best_model_fold{}_epoch*.pth".format(i)))[0] # find the model for each fold
     state_dict = torch.load(model_save, map_location=torch.device('cpu'))
     model.load_state_dict(state_dict)
     model.eval()  # Set model to evaluate mode
@@ -140,7 +140,6 @@ for i in range(1, 6):
     Visualization
     '''
     # Initialize lists to store SHAP values and combined inputs
-
     batch_combined_inputs = []
     batch_shap_values = []
     batch_shap_values_0 = []
