@@ -15,7 +15,10 @@ Clinical data: participant demographics
 
 
 ## Model training and testing
-If you want to test your data, please run the code "train_test_main.py".
+For testing your data, please run the code "train_test_main.py".
+
+## Feature visualization
+For feature importance, please run the code "vis_model_integrated.py".
 
 
 
