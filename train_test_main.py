@@ -40,7 +40,6 @@ class ResNet18_merge(nn.Module):
 
         self.mlp1 = nn.Linear(512,128)
         self.mlp2 = nn.Linear(128,16)
-
         self.mlp3 = nn.Linear(23,2)  
 
 
