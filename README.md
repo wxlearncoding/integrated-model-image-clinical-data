@@ -1,5 +1,5 @@
 # integrated-model-image-clinical-data
-This is the supplementary code for the paper "Integrated Deep Learning Model for Prediction of Disappearance of Indeterminate Pulmonary Nodules in Low-dose Chest CT Scans".
+This is the supplementary code for the paper "A Comparison of an Integrated and Image-Only Deep Learning Model for Predicting the Disappearance of Indeterminate Pulmonary Nodules".
 
 ## Input data
 ### 1 image preprocessing 
