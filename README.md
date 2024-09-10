@@ -5,7 +5,7 @@ This is the supplementary code for the paper "Integrated Deep Learning Model for
 ### 1 image preprocessing 
 - The lung window setting was performed based on [WW: 1600 HU, WL: -700 HU].
 - CT scans were interpolated to a voxel size of 1×1×1 mm using trilinear interpolation.
-- Each lung nodule was saved separately in the center of a 3D cube of 32×32×32 mm3.
+- Each lung nodule was saved separately in the center of a 3D cube of 32×32×32 mm<sup>3</sup>.
 - Image format is npy
 
 ### 2 Clinical data preprocessing
