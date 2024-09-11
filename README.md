@@ -5,9 +5,9 @@ This is the supplementary code for the paper "**A Comparison of an Integrated an
 Please follow and cite our paper for data preprocessing: Wang J, Sourlos N, Zheng S, et al. Preparing CT imaging datasets for deep learning in lung nodule analysis: Insights from four well-known datasets. Heliyon. 2023;9(6):e17104. Published 2023 Jun 16. doi:10.1016/j.heliyon.2023.e17104 [https://pubmed.ncbi.nlm.nih.gov/37484314/].
 
 ### 1 image preprocessing 
-- The lung window setting was performed based on WW: 1600 HU and WL: -700 HU.
-- CT scans were interpolated to a voxel size of 1×1×1 mm using trilinear interpolation.
-- Each lung nodule was saved separately in the center of a 3D cube of 32×32×32 mm<sup>3</sup>.
+- The lung window setting was performed based on WW: 1600 HU and WL: -700 HU
+- CT scans were interpolated to a voxel size of 1×1×1 mm using trilinear interpolation
+- Each lung nodule was saved separately in the center of a 3D cube of 32×32×32 mm<sup>3</sup>
 - Image format is npy
 
 ### 2 Clinical data preprocessing
